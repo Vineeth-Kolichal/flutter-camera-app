@@ -1,13 +1,19 @@
 import 'package:camera/camera.dart';
+import 'package:camera_app/database/functions/db_fuctions.dart';
+import 'package:camera_app/database/model/image_model.dart';
 import 'package:camera_app/screens/camera_screen/camera_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 late List<CameraDescription> cameras;
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
+  final appDocumentDirectory = await getDirectory();
+  Hive.initFlutter(appDocumentDirectory.path);
+  if (!Hive.isAdapterRegistered(ImageModelAdapter().typeId)) {
+    Hive.registerAdapter(ImageModelAdapter());
+  }
   runApp(CameraApp());
 }
 

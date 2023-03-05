@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
+import 'package:camera_app/database/functions/db_fuctions.dart';
+import 'package:camera_app/database/model/image_model.dart';
 import 'package:camera_app/main.dart';
 import 'package:camera_app/screens/gallery_screen/screen_galley.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:path/path.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -96,11 +99,18 @@ class _CameraScreenState extends State<CameraScreen> {
                             try {
                               await _controller.setFlashMode(mode);
                               picture = await _controller.takePicture();
+                              print(File(picture.path));
                             } on CameraException catch (e) {
                               debugPrint(
                                   "error occured while taking picture:$e");
                               return;
                             }
+                            final fileName = basename(picture.path);
+                            final imagePath =
+                                await saveImage(File(picture.path), fileName);
+                            ImageModel img = ImageModel(
+                                imagePath: imagePath, imageName: fileName);
+                            addImage(img);
                           },
                           icon: const Icon(
                             Icons.camera,
