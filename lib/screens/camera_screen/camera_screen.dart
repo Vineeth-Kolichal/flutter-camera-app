@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:camera_app/database/functions/db_fuctions.dart';
 import 'package:camera_app/database/model/image_model.dart';
 import 'package:camera_app/main.dart';
+import 'package:camera_app/screens/camera_screen/white_screen.dart';
 import 'package:camera_app/screens/gallery_screen/screen_galley.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
@@ -21,7 +22,6 @@ class _CameraScreenState extends State<CameraScreen> {
   late CameraController _controller;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = CameraController(cameras[0], ResolutionPreset.max);
     _controller.initialize().then((_) {
@@ -90,6 +90,8 @@ class _CameraScreenState extends State<CameraScreen> {
                         IconButton(
                           focusColor: Colors.blue,
                           onPressed: () async {
+                            await Navigator.of(context).push(MaterialPageRoute(
+                                builder: ((ctx) => const WhiteScreen())));
                             if (!_controller.value.isInitialized) {
                               return;
                             }
@@ -99,7 +101,7 @@ class _CameraScreenState extends State<CameraScreen> {
                             try {
                               await _controller.setFlashMode(mode);
                               picture = await _controller.takePicture();
-                              print(File(picture.path));
+                              //print(File(picture.path));
                             } on CameraException catch (e) {
                               debugPrint(
                                   "error occured while taking picture:$e");

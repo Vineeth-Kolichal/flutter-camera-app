@@ -47,13 +47,16 @@ class ScreenGalley extends StatelessWidget {
                                 crossAxisSpacing: 10.0,
                                 mainAxisSpacing: 10.0),
                         itemBuilder: (BuildContext context, int index) {
-                          ImageModel img = image[index];
+                          final img = image[index];
                           File imgfile = File(img.imagePath);
                           return GestureDetector(
+                            
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: ((ctx) =>
-                                      SingleView(imageFile: imgfile))));
+                                  builder: ((ctx) => SingleView(
+                                        imageFile: imgfile,
+                                        keyToDel: img.key,
+                                      ))));
                             },
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),

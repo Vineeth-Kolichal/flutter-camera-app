@@ -10,7 +10,7 @@ Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
   final appDocumentDirectory = await getDirectory();
-  Hive.initFlutter(appDocumentDirectory.path);
+  Hive.initFlutter(appDocumentDirectory?.path);
   if (!Hive.isAdapterRegistered(ImageModelAdapter().typeId)) {
     Hive.registerAdapter(ImageModelAdapter());
   }
