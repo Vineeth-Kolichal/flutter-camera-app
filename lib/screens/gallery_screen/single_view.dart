@@ -47,6 +47,7 @@ class SingleView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(40))),
                     onPressed: () async {
                       await deleteImage(keyToDel);
+                      // ignore: use_build_context_synchronously
                       Navigator.of(context).pop();
                     },
                     child: const Icon(

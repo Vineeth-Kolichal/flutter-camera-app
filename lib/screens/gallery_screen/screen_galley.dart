@@ -50,7 +50,6 @@ class ScreenGalley extends StatelessWidget {
                           final img = image[index];
                           File imgfile = File(img.imagePath);
                           return GestureDetector(
-                            
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: ((ctx) => SingleView(
@@ -66,11 +65,6 @@ class ScreenGalley extends StatelessWidget {
                                 height: 25,
                                 fit: BoxFit.cover,
                               ),
-                              // child: Image.network(
-                              //     width: 50,
-                              //     height: 50,
-                              //     fit: BoxFit.cover,
-                              //     'https://static.toiimg.com/photo/msid-80403566/80403566.jpg?240161'),
                             ),
                           );
                         });

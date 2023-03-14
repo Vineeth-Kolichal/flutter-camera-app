@@ -14,7 +14,7 @@ Future<void> main(List<String> args) async {
   if (!Hive.isAdapterRegistered(ImageModelAdapter().typeId)) {
     Hive.registerAdapter(ImageModelAdapter());
   }
-  runApp(CameraApp());
+  runApp(const CameraApp());
 }
 
 class CameraApp extends StatelessWidget {
@@ -22,7 +22,7 @@ class CameraApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: CameraScreen(),
     );
   }
